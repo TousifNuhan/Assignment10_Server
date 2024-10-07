@@ -24,6 +24,18 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         const tourismCollection=client.db("TourismDb").collection("TouristCollection")
+
+        app.get('/spot',async(req,res)=>{
+            const cursor=tourismCollection.find()
+            const result=await cursor.toArray()
+            res.send(result)
+        })
+
+        app.post('/spot', async(req,res)=>{
+            const spot=req.body
+            const result=await tourismCollection.insertOne(spot)
+            req.send(result)
+        })
     } finally {
         // Ensures that the client will close when you finish/error
         // await client.close();
