@@ -34,7 +34,6 @@ async function run() {
 
         app.post('/spot', async(req,res)=>{
             const spot=req.body
-          
             const result=await tourismCollection.insertOne(spot)
             res.send(result)
         })
@@ -51,7 +50,7 @@ async function run() {
 
         //lookup
         app.get('/user',async(req,res)=>{
-           
+            
             const result = await userCollection.aggregate([
                 {
                     $lookup: {
